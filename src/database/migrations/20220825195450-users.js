@@ -25,6 +25,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+    },
+    {
+      timestamps: false,
     })
     return User;
   },
