@@ -5,7 +5,6 @@ const { JWT_SECRET } = process.env;
 
 const postUserValidation = async (req, res) => {
     const { email, password, displayName, image } = req.body;
-    console.log(JWT_SECRET, 'jwt');
 
     const [user, created] = await User.findOrCreate({
     where: { email },
@@ -23,6 +22,13 @@ const postUserValidation = async (req, res) => {
     return res.status(201).json({ token });
 };
 
+const getAllUsers = async (_req, res) => {
+    const allUser = await User.findAll({ attributes: ['id',
+     'displayName', 'email', 'image'] });
+    return res.status(200).json(allUser);
+};
+
 module.exports = {
     postUserValidation,
+    getAllUsers,
 };

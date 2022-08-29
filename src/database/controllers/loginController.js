@@ -12,12 +12,9 @@ const postLoginValidation = async (req, res) => {
     const testPassword = await User.findAll({
         where: { password },
     });
-    // const testUser = await Users.findOne({ where: { email } });
-    // const testPassword = await Users.findOne({ where: { password } });
         if (!testUser.length || !testPassword.length) {
             return res.status(400).json({ message: 'Invalid fields' });
         }
-        // const secret = 'tokenAqui';
         const jwtConfig = {
             expiresIn: '1d', algorithm: 'HS256',
         };
