@@ -28,7 +28,19 @@ const getAllUsers = async (_req, res) => {
     return res.status(200).json(allUser);
 };
 
+const getIdUsers = async (req, res) => {
+    const { params } = req;
+    const { id } = params;
+    const searchId = await User.findAll({ where: { id },
+         attributes: { exclude: ['password'] } }); 
+    if (!searchId.length) {
+        return res.status(404).json({ message: 'User does not exist' });
+    }
+    return res.status(200).json(searchId);
+};
+
 module.exports = {
     postUserValidation,
     getAllUsers,
+    getIdUsers,
 };

@@ -4,7 +4,8 @@ const { postLoginValidation } = require('./database/controllers/loginController'
 const { missingDate } = require('./database/middlwares/validationLogin');
 const { displayNameTest, emailTesst,
    passwordTestSix } = require('./database/middlwares/validationUsers');
-const { postUserValidation, getAllUsers } = require('./database/controllers/userControllers');
+const { postUserValidation, getAllUsers, 
+  getIdUsers } = require('./database/controllers/userControllers');
 const { tokenValid } = require('./database/middlwares/validationToken');
 
 // não remova a variável `API_PORT` ou o `listen`
@@ -19,5 +20,6 @@ app.post('/login', missingDate, postLoginValidation);
 app.post('/user', displayNameTest, emailTesst, passwordTestSix, postUserValidation);
 
 app.get('/user', tokenValid, getAllUsers);
+app.get('/user/:id', tokenValid, getIdUsers);
 
 app.listen(port, () => console.log('ouvindo porta', port));
