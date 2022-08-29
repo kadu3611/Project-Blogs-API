@@ -18,6 +18,6 @@ app.get('/', (_request, response) => {
 app.post('/login', missingDate, postLoginValidation);
 app.post('/user', displayNameTest, emailTesst, passwordTestSix, postUserValidation);
 
-app.get('/user',tokenValid, getAllUsers);
+app.get('/user', tokenValid, getAllUsers);
 
 app.listen(port, () => console.log('ouvindo porta', port));
