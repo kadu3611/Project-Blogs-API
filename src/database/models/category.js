@@ -6,7 +6,7 @@ const Categories = (sequelize, DataTypes) => {
   },
   {
     timestamps: false, 
-    tableName: 'Category',
+    tableName: 'Categories',
   });
 
   // Users.associate = (models) => {

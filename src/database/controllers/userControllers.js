@@ -33,10 +33,11 @@ const getIdUsers = async (req, res) => {
     const { id } = params;
     const searchId = await User.findAll({ where: { id },
          attributes: { exclude: ['password'] } }); 
+         console.log(searchId, 'searchId');
     if (!searchId.length) {
         return res.status(404).json({ message: 'User does not exist' });
     }
-    return res.status(200).json(searchId);
+    return res.status(200).json(searchId[0]);
 };
 
 module.exports = {
