@@ -12,9 +12,7 @@ const tokenValid = async (req, res, next) => {
         return res.status(401).json({ message: 'Token not found' });
     }
     const decoded = jwt.verify(authorization, JWT_SECRET);
-    console.log(decoded);
-    // const user = await User.findOne({ where: { email: decoded.data.email } });
-    // console.log(user);
+    req.auth = decoded.data;
     next();
     } catch (err) {
         return res.status(401).json({ message: 'Expired or invalid token' });

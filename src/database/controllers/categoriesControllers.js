@@ -16,7 +16,6 @@ return res.status(201).json(user.dataValues);
 
 const getCategory = async (_req, res) => {
     const getAll = await Category.findAll();
-    console.log(getAll, 'teste');
     return res.status(200).json(getAll);
 };
 
@@ -24,3 +23,5 @@ module.exports = {
     postAddCategory,
     getCategory,
 };
+
+// bulkCreate => lança tudo no banco de dados
