@@ -1,10 +1,8 @@
 const { BlogPost, Category, User } = require('../models');
 
-const getBlogPost = async (req, res) => {
-    // const { auth } = req;
-
-    // const [{ id }] = await User.findAll({ where: { email } });
-    const result = await BlogPost.findAll({ include: [{
+const getBlogPost = async (_req, res) => {
+   try {
+ const result = await BlogPost.findAll({ include: [{
         model: User,
         as: 'user',
        attributes: { exclude: ['password'] },
@@ -12,11 +10,13 @@ const getBlogPost = async (req, res) => {
     {
         model: Category,
         as: 'categories',
-        // through: { attributes: [] },
+        through: { attributes: [] },
     }],
     });
-    console.log(result, 'result');
     return res.status(200).json(result);
+} catch (err) {
+    console.error(err);
+}
 };
 
 const postCategory = async (req, res) => {
