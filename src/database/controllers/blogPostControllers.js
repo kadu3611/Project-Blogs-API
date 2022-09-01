@@ -1,7 +1,6 @@
 const { BlogPost, Category, User } = require('../models');
 
 const getBlogPost = async (_req, res) => {
-   try {
  const result = await BlogPost.findAll({ include: [{
         model: User,
         as: 'user',
@@ -14,9 +13,6 @@ const getBlogPost = async (_req, res) => {
     }],
     });
     return res.status(200).json(result);
-} catch (err) {
-    console.error(err);
-}
 };
 
 const postCategory = async (req, res) => {
@@ -37,7 +33,7 @@ const postCategory = async (req, res) => {
         return user.dataValues;
     }));
     console.log(categoryValid, 'categoryValid');
-    return res.status(201).json(categoryValid);
+    return res.status(201).json(auth);
 };
 
 module.exports = {
