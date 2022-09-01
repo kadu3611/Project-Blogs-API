@@ -12,7 +12,7 @@ const getBlogPost = async (req, res) => {
     {
         model: Category,
         as: 'categories',
-        through: { attributes: [] },
+        // through: { attributes: [] },
     }],
     });
     console.log(result, 'result');
@@ -21,19 +21,23 @@ const getBlogPost = async (req, res) => {
 
 const postCategory = async (req, res) => {
     const { categoryIds, content, title } = req.body;
-    const categoryValid = Promise.all(categoryIds.map(async (element) => {
+    const { auth } = req;
+    console.log(auth, 'auth');
+    // const user = await User.findAll({})
+    const categoryValid = await Promise.all(categoryIds.map(async (element) => {
         const [user] = await BlogPost.findOrCreate({
             where: { id: element },
             defaults: {
-                categoryIds,
                 content,
                 title,
                 userId: element,
             },
         });
+       
         return user.dataValues;
     }));
-    return res.status(201).json(await categoryValid);
+    console.log(categoryValid, 'categoryValid');
+    return res.status(201).json(categoryValid);
 };
 
 module.exports = {
