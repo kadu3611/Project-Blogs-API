@@ -38,7 +38,27 @@ const postCategory = async (req, res) => {
     return res.status(201).json(categoryValid);
 };
 
+const getBlogPostId = async (req, res) => {
+    const { id } = req.params;
+    const resultDateId = await BlogPost.findAll({
+        where: { id },
+        include: [{
+            model: User,
+            as: 'user',
+            attributes: { exclude: ['password'] },
+        },
+        {
+            model: Category,
+            as: 'categories',
+            through: { attributes: [] },
+        }],
+    });
+
+    return res.status(200).json(resultDateId);
+};
+
 module.exports = {
     postCategory,
     getBlogPost,
+    getBlogPostId,
 };
