@@ -9,7 +9,6 @@ const postLoginValidation = async (req, res) => {
     const testUser = await User.findOne({
         where: body,
     });
-    console.log(testUser, 'testUser');
 
     if (!testUser) {
         return res.status(400).json({ message: 'Invalid fields' });

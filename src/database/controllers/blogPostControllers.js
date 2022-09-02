@@ -40,7 +40,7 @@ const postCategory = async (req, res) => {
 
 const getBlogPostId = async (req, res) => {
     const { id } = req.params;
-    const resultDateId = await BlogPost.findAll({
+    const [resultDateId] = await BlogPost.findAll({
         where: { id },
         include: [{
             model: User,
